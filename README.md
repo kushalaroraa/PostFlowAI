@@ -1,4 +1,4 @@
-# AI Social Agent
+# PostFlowAI
 
 A MERN (MongoDB, Express, React, Node.js) based Social Media Agent that helps automate post generation, scheduling, and management using AI (Google Gemini).
 
