@@ -40,10 +40,12 @@ A MERN (MongoDB, Express, React, Node.js) based Social Media Agent that helps au
     ```
 
 ## Features
-- AI-powered content plan generation.
-- Post scheduling and status tracking.
+- AI-powered content generation.
+- Post scheduling and status tracking with calendar.
+- Smart AI posting time suggestions with reasoning.
+- AI Studio with persona and style customization.
 - Image uploads and preview.
-- Persona-based content consistency.
+- Real-time Dashboard with draft/published/scheduled posts.
 
 ## Deployment
 The project includes a `Dockerfile` and `deploy.sh` script for deployment to Google Cloud Run.
