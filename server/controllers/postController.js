@@ -34,8 +34,13 @@ exports.generatePost = async (req, res) => {
       post: saved
     });
   } catch (error) {
-    console.error('Generate Post Error:', error);
-    res.status(500).json({ error: 'Failed to generate post' });
+    if (error.message.includes('AI generation failed')) {
+      console.error('🤖 AI Generation Error:', error.message);
+      return res.status(500).json({ error: 'AI failed to generate content. Please try again later.' });
+    }
+    
+    console.error('💾 Database/Server Error:', error.message);
+    res.status(500).json({ error: 'Failed to save or process post. Check database connection.' });
   }
 };
 

@@ -48,28 +48,33 @@ Output must be valid JSON matching the provided schema.`;
   checkCooldown();
   logAiCall('GENERATE_POST_WITH_TIMING', { topic: plan.topic, persona: plan.persona });
 
-  const response = await ai.models.generateContent({
-    model: 'gemini-flash-latest',
-    contents: [{ role: 'user', parts: [{ text: prompt }] }],
-    config: {
-      responseMimeType: 'application/json',
-      responseSchema: dayContentSchema
-    }
-  });
+  try {
+    const model = ai.models.get('gemini-1.5-flash');
+    const response = await model.generateContent({
+      contents: [{ role: 'user', parts: [{ text: prompt }] }],
+      config: {
+        responseMimeType: 'application/json',
+        responseSchema: dayContentSchema
+      }
+    });
 
-  const parsed = JSON.parse(response.text);
+    const parsed = JSON.parse(response.text);
 
-  return {
-    caption: parsed.caption,
-    hashtags: parsed.hashtags,
-    recommendedTime: parsed.recommendedTime,
-    timingReason: parsed.timingReason,
-    tone: plan.tone,
-    style: plan.style,
-    topic: plan.topic,
-    persona: plan.persona,
-    generatedAt: new Date().toISOString(),
-  };
+    return {
+      caption: parsed.caption,
+      hashtags: parsed.hashtags,
+      recommendedTime: parsed.recommendedTime,
+      timingReason: parsed.timingReason,
+      tone: plan.tone,
+      style: plan.style,
+      topic: plan.topic,
+      persona: plan.persona,
+      generatedAt: new Date().toISOString(),
+    };
+  } catch (error) {
+    console.error('❌ AI Agent Error:', error.message);
+    throw new Error(`AI generation failed: ${error.message}`);
+  }
 }
 
 module.exports = { generatePost };
