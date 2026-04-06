@@ -1,0 +1,17 @@
+{
+  "name": "ai-social-agent",
+  "version": "1.0.0",
+  "description": "AI Social Media Agent - MERN Application",
+  "scripts": {
+    "start": "node server/index.js",
+    "build": "cd client && npm install && npm run build",
+    "server": "cd server && node index.js",
+    "client": "cd client && npm run dev",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "install-all": "npm install && cd server && npm install && cd ../client && npm install"
+  },
+  "dependencies": {
+    "@google/genai": "^1.46.0",
+    "concurrently": "^8.2.2"
+  }
+}
